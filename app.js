@@ -10,25 +10,21 @@ var appRoutes = require('./routes/app');
 var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
-// express app getting started
 var app = express();
-mongoose.connect('mongodb://localhost:27017/meandb', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/meandb', { useMongoClient: true })
 
-// views assigned
-app.set('views', path.join(__dirname, 'views'));
 // view engine setup
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-// give public access to public folder. and rest are not accessible
 app.use(express.static(path.join(__dirname, 'public')));
 
-// get rid off cors error
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -36,7 +32,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// forwarding routes to routes/app.js file
 app.use('/message', messageRoutes);
 app.use('/user', userRoutes);
 app.use('/', appRoutes);
@@ -45,5 +40,6 @@ app.use('/', appRoutes);
 app.use(function (req, res, next) {
     return res.render('index');
 });
+
 
 module.exports = app;

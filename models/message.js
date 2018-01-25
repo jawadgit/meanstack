@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-/**
- * message model properties defined
- * properties type defined using schema.types (the standard way)
- * @type {mongoose.Schema}
- */
+var User = require('./user');
+
 var schema = new Schema({
-    content:  {type: String, required: true},
-    user:     {type: Schema.Types.ObjectId, ref: 'User'}
+    content: {type: String, required: true},
+    user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-/**
- * model instance created so that we could use it to create new messages
- */
+schema.post('remove', function (message) {
+    User.findById(message.user, function (err, user) {
+        user.messages.pull(message._id);
+        user.save();
+    });
+});
+
 module.exports = mongoose.model('Message', schema);
