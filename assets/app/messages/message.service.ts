@@ -23,6 +23,7 @@ export class MessageService {
         return this.http.post('http://localhost:3000/message' + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json();
+                console.log('result:', result);
                 const message = new Message(
                     result.obj.content,
                     result.obj.user.firstName,

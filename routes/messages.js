@@ -79,7 +79,7 @@ router.patch('/:id', function (req, res, next) {
                 error: {message: 'Message not found'}
             });
         }
-        if (message.user != decoded.user._id) {
+        if (message.user !== decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
                 error: {message: 'Users do not match'}
@@ -116,7 +116,7 @@ router.delete('/:id', function (req, res, next) {
                 error: {message: 'Message not found'}
             });
         }
-        if (message.user != decoded.user._id) {
+        if (message.user !== decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
                 error: {message: 'Users do not match'}
