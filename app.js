@@ -11,7 +11,7 @@ var messageRoutes = require('./routes/messages');
 var userRoutes = require('./routes/user');
 
 var app = express();
-mongoose.connect('mongodb://localhost:27017/meandb', { useMongoClient: true });
+mongoose.connect('meandb-user:meandb-pass@ds011912.mlab.com:11912/meandb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +40,5 @@ app.use('/', appRoutes);
 app.use(function (req, res, next) {
     return res.render('index');
 });
-
 
 module.exports = app;
