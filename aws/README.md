@@ -1,2 +1,0 @@
-# meanstack
-Only meanstack repo
